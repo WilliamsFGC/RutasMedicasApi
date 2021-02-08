@@ -5,7 +5,7 @@ namespace RutasMedicas.Data.Api.interfaces
 {
     public interface IPersonRepository
     {
-        object SavePerson(PersonDto person);
+        string SavePerson(PersonDto person);
         object UpdatePerson(PersonDto person);
         long DeletePerson(string idPerson);
         IEnumerable<PersonDto> GetPerson(PersonSearchDto person);

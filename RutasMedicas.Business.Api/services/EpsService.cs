@@ -13,9 +13,9 @@ namespace RutasMedicas.Business.Api.services
         {
             this.epsRepository = epsRepository;
         }
-        public GenericResponse<IEnumerable<EpsDto>> GetEps()
+        public GenericResponse<IEnumerable<EpsDto>> GetEps(string entidad)
         {
-            IEnumerable<EpsDto> result = epsRepository.GetEps();
+            IEnumerable<EpsDto> result = epsRepository.GetEps(entidad);
             GenericResponse<IEnumerable<EpsDto>> response = new GenericResponse<IEnumerable<EpsDto>>()
             {
                 Result = result

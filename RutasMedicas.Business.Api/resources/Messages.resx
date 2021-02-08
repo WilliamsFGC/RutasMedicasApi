@@ -117,19 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InvalidEmailsCount" xml:space="preserve">
+    <value>Por favor agregar mínimo un correo electrónico</value>
+  </data>
   <data name="NoFoundDeletePerson" xml:space="preserve">
-    <value>No se encontró la persona a eliminar</value>
+    <value>No se encontró el paciente a eliminar</value>
   </data>
   <data name="NoFoundUpdatePerson" xml:space="preserve">
-    <value>No se encontró la persona a actualizar</value>
+    <value>No se encontró el paciente a actualizar</value>
   </data>
   <data name="SuccessAddPerson" xml:space="preserve">
-    <value>Se ha guardado la persona correctamente</value>
+    <value>Se ha guardado el paciente correctamente</value>
   </data>
   <data name="SuccessDeletePerson" xml:space="preserve">
-    <value>Se ha eliminado la persona correctamente</value>
+    <value>Se ha eliminado el paciente correctamente</value>
   </data>
   <data name="SuccessUpdatePerson" xml:space="preserve">
-    <value>Se ha actualizado la persona correctamente</value>
+    <value>Se ha actualizado el paciente correctamente</value>
   </data>
 </root>

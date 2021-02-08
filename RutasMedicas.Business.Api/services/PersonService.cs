@@ -36,26 +36,51 @@ namespace RutasMedicas.Business.Api.services
             return response;
         }
 
-        public GenericResponse<object> SavePerson(PersonDto person)
+        private bool ValidateEmails(string[] emails)
         {
-            object result = personRepository.SavePerson(person);
-            GenericResponse<object> response = new GenericResponse<object>()
+            emails = emails ?? new string[0];
+            return emails.Length > 1;
+        }
+
+        public GenericResponse<string> SavePerson(PersonDto person)
+        {
+            GenericResponse<string> response = new GenericResponse<string>()
             {
-                Message = Messages.SuccessAddPerson,
-                Result = result
+                // Validar los correos electrónicos
+                IsSuccessful = ValidateEmails(person.CorreoElectronico)
             };
+
+            if (!response.IsSuccessful)
+            {
+                response.Message = Messages.InvalidEmailsCount;
+                return response;
+            }
+            // Guardar paciente
+            string result = personRepository.SavePerson(person);
+
+            response.Message = Messages.SuccessAddPerson;
+            response.Result = result;
             return response;
         }
 
         public GenericResponse<bool> UpdatePerson(PersonDto person)
         {
-            bool result = personRepository.UpdatePerson(person) != null;
             GenericResponse<bool> response = new GenericResponse<bool>()
             {
-                IsSuccessful = result,
-                Message = (result) ? Messages.SuccessUpdatePerson : Messages.NoFoundUpdatePerson,
-                Result = result
+                // Validar los correos electrónicos
+                IsSuccessful = ValidateEmails(person.CorreoElectronico)
             };
+
+            if (!response.IsSuccessful)
+            {
+                response.Message = Messages.InvalidEmailsCount;
+                return response;
+            }
+
+            bool result = personRepository.UpdatePerson(person) != null;
+            response.IsSuccessful = result;
+            response.Message = (result) ? Messages.SuccessUpdatePerson : Messages.NoFoundUpdatePerson;
+            response.Result = result;
             return response;
         }
     }

@@ -5,6 +5,6 @@ namespace RutasMedicas.Data.Api.interfaces
 {
     public interface IEpsRepository
     {
-        IEnumerable<EpsDto> GetEps();
+        IEnumerable<EpsDto> GetEps(string entidad);
     }
 }

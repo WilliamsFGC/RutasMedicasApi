@@ -13,6 +13,8 @@ namespace RutasMedicas.Entities.Api.dto
         public DateTime FechaCreacion { get; set; }
         public DateTime? FechaUltimaModificacion { get; set; }
         public string CodigoInterno { get; set; }
+        public string NumeroDocumento { get; set; }
+        public DocumentTypeDto TipoDocumento { get; set; }
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
@@ -27,10 +29,8 @@ namespace RutasMedicas.Entities.Api.dto
 
     public class PersonIdentity
     {
-        public string NumeroDocumento { get; set; }
         public DateTime FechaExpedicion { get; set; }
         public string LugarExpedicion { get; set; }
-        public DocumentTypeDto TipoDocumento { get; set; }
     }
 
     public class PersonSearchDto
@@ -40,7 +40,7 @@ namespace RutasMedicas.Entities.Api.dto
 
     public class SexDto
     {
-        public int Id { get; set; }
+        public int _Id { get; set; }
         public string Descripcion { get; set; }
         public string Otro { get; set; }
     }

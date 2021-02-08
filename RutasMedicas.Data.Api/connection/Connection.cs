@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using RutasMedicas.Data.Api.interfaces;
+using RutasMedicas.Utilities.Api.exceptions;
+using System;
 
 namespace RutasMedicas.Data.Api.connection
 {
@@ -19,6 +22,12 @@ namespace RutasMedicas.Data.Api.connection
             string connectionString = configuration.GetConnectionString(connectionName);
             IMongoClient client = new MongoClient(connectionString);
             IMongoDatabase database = client.GetDatabase(databaseName);
+            // Verificar la conexión a la base de datos
+            bool aliveService = database.RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(1000);
+            if (!aliveService)
+            {
+                throw new MongoDbConnectionException("No se pudo conectar al servidor BD solicitado");
+            }
             IMongoCollection<T> collection = database.GetCollection<T>(name);
             return collection;
         }

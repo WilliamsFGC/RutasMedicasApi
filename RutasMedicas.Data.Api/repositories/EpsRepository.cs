@@ -2,6 +2,7 @@
 using RutasMedicas.Entities.Api.dto;
 using System.Collections.Generic;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace RutasMedicas.Data.Api.repositories
 {
@@ -13,10 +14,12 @@ namespace RutasMedicas.Data.Api.repositories
             epsCollection = connection.GetCollection<EpsDto>("eps");
         }
 
-        public IEnumerable<EpsDto> GetEps()
+        public IEnumerable<EpsDto> GetEps(string entidad)
         {
             // Consultar las Eps
-            IFindFluent<EpsDto, EpsDto> find = epsCollection.Find(f => true);
+            entidad = entidad ?? "";
+            FilterDefinition<EpsDto> filter = Builders<EpsDto>.Filter.Regex(f => f.Entidad, new BsonRegularExpression(entidad, "i"));
+            IFindFluent<EpsDto, EpsDto> find = epsCollection.Find(filter: filter);
             IEnumerable<EpsDto> result = find.ToList();
             return result;
         }

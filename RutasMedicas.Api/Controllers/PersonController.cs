@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using RutasMedicas.Business.Api.interfaces;
 using RutasMedicas.Entities.Api.dto;
 using RutasMedicas.Entities.Api.entities;
@@ -34,10 +33,7 @@ namespace RutasMedicas.Api.Controllers
         [HttpPost("SavePerson")]
         public IActionResult SavePerson([FromBody]PersonDto person)
         {
-            //var q = person.Eps[0].IdEntidad.GetType().GetProperty("ValueKind").GetValue(person.Eps[0].IdEntidad);
-            //string val = person.Eps[0].IdEntidad.ToString();
-            //MongoDB.Bson.BsonObjectId Id = MongoDB.Bson.BsonObjectId.Create(q);
-            GenericResponse<object> response = personService.SavePerson(person);
+            GenericResponse<string> response = personService.SavePerson(person);
             return StatusCode(response.StatusCode, response);
         }
 
@@ -46,12 +42,6 @@ namespace RutasMedicas.Api.Controllers
         {
             GenericResponse<bool> response = personService.UpdatePerson(person);
             return StatusCode(response.StatusCode, response);
-        }
-
-        [HttpPost("ObjectId")]
-        public IActionResult Convert([FromBody] ObjectId objectId)
-        {
-            return StatusCode(200, objectId);
         }
     }
 }

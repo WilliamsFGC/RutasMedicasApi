@@ -61,7 +61,16 @@ namespace RutasMedicas.Business.Api.resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se encontró la persona a eliminar.
+        ///   Busca una cadena traducida similar a Por favor agregar mínimo un correo electrónico.
+        /// </summary>
+        internal static string InvalidEmailsCount {
+            get {
+                return ResourceManager.GetString("InvalidEmailsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se encontró el paciente a eliminar.
         /// </summary>
         internal static string NoFoundDeletePerson {
             get {
@@ -70,7 +79,7 @@ namespace RutasMedicas.Business.Api.resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se encontró la persona a actualizar.
+        ///   Busca una cadena traducida similar a No se encontró el paciente a actualizar.
         /// </summary>
         internal static string NoFoundUpdatePerson {
             get {
@@ -79,7 +88,7 @@ namespace RutasMedicas.Business.Api.resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se ha guardado la persona correctamente.
+        ///   Busca una cadena traducida similar a Se ha guardado el paciente correctamente.
         /// </summary>
         internal static string SuccessAddPerson {
             get {
@@ -88,7 +97,7 @@ namespace RutasMedicas.Business.Api.resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se ha eliminado la persona correctamente.
+        ///   Busca una cadena traducida similar a Se ha eliminado el paciente correctamente.
         /// </summary>
         internal static string SuccessDeletePerson {
             get {
@@ -97,7 +106,7 @@ namespace RutasMedicas.Business.Api.resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se ha actualizado la persona correctamente.
+        ///   Busca una cadena traducida similar a Se ha actualizado el paciente correctamente.
         /// </summary>
         internal static string SuccessUpdatePerson {
             get {

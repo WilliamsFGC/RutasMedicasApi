@@ -16,10 +16,10 @@ namespace RutasMedicas.Api.Controllers
             this.epsService = epsService;
         }
 
-        [HttpGet("GetEps")]
-        public IActionResult GetEps()
+        [HttpGet("GetEps/{entidad?}")]
+        public IActionResult GetEps(string entidad)
         {
-            GenericResponse<IEnumerable<EpsDto>> response = epsService.GetEps();
+            GenericResponse<IEnumerable<EpsDto>> response = epsService.GetEps(entidad);
             return StatusCode(response.StatusCode, response);
         }
     }

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RutasMedicas.Entities.Api\RutasMedicas.Entities.Api.csproj" />
+    <ProjectReference Include="..\RutasMedicas.Utilities.Api\RutasMedicas.Utilities.Api.csproj" />
   </ItemGroup>
 
 </Project>

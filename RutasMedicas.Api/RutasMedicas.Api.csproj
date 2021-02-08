@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RutasMedicas.Business.Api\RutasMedicas.Business.Api.csproj" />
     <ProjectReference Include="..\RutasMedicas.Entities.Api\RutasMedicas.Entities.Api.csproj" />
+    <ProjectReference Include="..\RutasMedicas.Utilities.Api\RutasMedicas.Utilities.Api.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

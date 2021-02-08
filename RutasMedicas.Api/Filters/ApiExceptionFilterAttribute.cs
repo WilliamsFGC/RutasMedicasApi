@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using RutasMedicas.Entities.Api.entities;
 using System;
 using System.Net;
+using RutasMedicas.Utilities.Api.exceptions;
+using MongoDB.Driver;
 
 namespace RutasMedicas.Api.Filters
 {
@@ -21,14 +23,34 @@ namespace RutasMedicas.Api.Filters
                 IsSuccessful = false
             };
             
-            if (context.Exception is Exception)
+            if (context.Exception is MongoDbConnectionException)
+            {
+                response.Message = message;
+                response.StatusCode = (int)HttpStatusCode.Conflict;
+            }
+            else if (context.Exception is MongoWriteException)
+            {
+                MongoWriteException mdbException = context.Exception as MongoWriteException;
+                response.Message = message;
+                if (mdbException.WriteError.Category == ServerErrorCategory.DuplicateKey)
+                {
+                    string messageField = mdbException.WriteError.Message;
+                    int indexPesosSign = messageField.IndexOf("$");
+                    string campo = messageField.Substring(indexPesosSign, (messageField.Length - indexPesosSign));
+                    int indexUnderLine = campo.IndexOf("_");
+                    campo = campo.Substring(1, indexUnderLine - 1);
+                    response.Message = $"No se puede duplicar el valor para '{campo}'";
+                    response.StatusCode = (int)HttpStatusCode.Conflict;
+                }
+            }
+            else if (context.Exception is Exception)
             {
                 response.Message = message;
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 
             ObjectResult objectResult = new ObjectResult(response);
-            objectResult.StatusCode = (int)response.StatusCode;
+            objectResult.StatusCode = response.StatusCode;
             context.Result = objectResult;
         }
     }

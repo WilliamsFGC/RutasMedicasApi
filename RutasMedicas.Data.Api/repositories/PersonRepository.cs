@@ -24,27 +24,31 @@ namespace RutasMedicas.Data.Api.repositories
             IEnumerable<PersonDto> result = find.ToList();
             return result;
         }
-        public object SavePerson(PersonDto person)
+        public string SavePerson(PersonDto person)
         {
             person.FechaCreacion = DateTime.Now;
             person.SchemaVersion = 1;
             person.DocumentVersion = 1;
+            person.CodigoInterno = Guid.NewGuid().ToString();
             personCollection.InsertOne(person);
             return person._id;
         }
         public object UpdatePerson(PersonDto person)
         {
             FilterDefinition<PersonDto> filter = Builders<PersonDto>.Filter.Eq(e => e._id, person._id);
+            // Actualizar campos de la colección
             UpdateDefinition<PersonDto> update = Builders<PersonDto>.Update
-                .Inc(i => i.DocumentVersion, 1)
-                .Set(f => f.CodigoInterno, person.CodigoInterno)
-                .Set(f => f.PrimerNombre, person.PrimerNombre)
-                .Set(f => f.SegundoNombre, person.SegundoNombre)
-                .Set(f => f.PrimerApellido, person.PrimerApellido)
-                .Set(f => f.SegundoApellido, person.SegundoApellido)
-                .Set(f => f.CorreoElectronico, person.CorreoElectronico)
-                .Set(f => f.EstadoCivil, person.EstadoCivil)
-                .Set(f => f.FechaUltimaModificacion, DateTime.Now);
+                .Inc(i => i.DocumentVersion, 1) // Incrementar el campo de 1 en 1
+                .Set(s => s.CodigoInterno, person.CodigoInterno)
+                .Set(s => s.PrimerNombre, person.PrimerNombre)
+                .Set(s => s.SegundoNombre, person.SegundoNombre)
+                .Set(s => s.PrimerApellido, person.PrimerApellido)
+                .Set(s => s.SegundoApellido, person.SegundoApellido)
+                .Set(s => s.CorreoElectronico, person.CorreoElectronico)
+                .Set(s => s.EstadoCivil, person.EstadoCivil)
+                .Set(s => s.FechaUltimaModificacion, DateTime.Now.AddHours(-5))
+                .Set(s => s.CorreoElectronico, person.CorreoElectronico)
+                .Set(s => s.Eps, person.Eps);
             person = personCollection.FindOneAndUpdate(filter, update);
             return person._id;
         }
