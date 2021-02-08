@@ -43,6 +43,11 @@ namespace RutasMedicas.Api.Filters
                     response.StatusCode = (int)HttpStatusCode.Conflict;
                 }
             }
+            else if (context.Exception is MongoAuthenticationException)
+            {
+                response.Message = "No hay acceso al servidor BD solicitado";
+                response.StatusCode = (int)HttpStatusCode.Conflict;
+            }
             else if (context.Exception is Exception)
             {
                 response.Message = message;
