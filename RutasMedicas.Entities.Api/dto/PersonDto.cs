@@ -40,7 +40,7 @@ namespace RutasMedicas.Entities.Api.dto
 
     public class SexDto
     {
-        public int _Id { get; set; }
+        public int _id { get; set; }
         public string Descripcion { get; set; }
         public string Otro { get; set; }
     }

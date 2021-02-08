@@ -35,10 +35,10 @@ namespace RutasMedicas.Api.Filters
                 if (mdbException.WriteError.Category == ServerErrorCategory.DuplicateKey)
                 {
                     string messageField = mdbException.WriteError.Message;
-                    int indexPesosSign = messageField.IndexOf("$");
+                    int indexPesosSign = messageField.IndexOf("{");
                     string campo = messageField.Substring(indexPesosSign, (messageField.Length - indexPesosSign));
-                    int indexUnderLine = campo.IndexOf("_");
-                    campo = campo.Substring(1, indexUnderLine - 1);
+                    int indexUnderLine = campo.IndexOf(":");
+                    campo = campo.Substring(1, indexUnderLine - 1).Trim();
                     response.Message = $"No se puede duplicar el valor para '{campo}'";
                     response.StatusCode = (int)HttpStatusCode.Conflict;
                 }
